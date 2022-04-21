@@ -6,15 +6,20 @@ import matplotlib.pyplot as plt
 #variables
 self_logged_error = [] #stored as an empty array to begin with
 
+#weight values for hidden layer + bias as last element in each array
+hidden_layer_weights = [{'weights':[0.74, 0.8, 0.35, 0.9]},
+                        {'weights':[0.13, 0.4, 0.97, 0.45]},
+                        {'weights':[0.68, 0.1, 0.96, 0.36]}]
+
+#weight values for output layer + bias as last element in each array
+output_layer_weights = [{'weights':[0.35, 0.5, 0.9, 0.98]},
+                        {'weights':[0.8, 0.13, 0.8, 0.92]}]
 # Initialize a network
 def init_Network(n_inputs, n_hidden, n_outputs):
         network = list() #entire network is defined as a list
-        hidden_layer = [{'weights':[0.74, 0.8, 0.35, 0.9]},
-                        {'weights':[0.13, 0.4, 0.97, 0.45]},
-                        {'weights':[0.68, 0.1, 0.96, 0.36]}] #weights for hidden layer + bias as last element in each array
+        hidden_layer = hidden_layer_weights
         network.append(hidden_layer) #above weights appended to hidden layer
-        output_layer = [{'weights':[0.35, 0.5, 0.9, 0.98]},
-                        {'weights':[0.8, 0.13, 0.8, 0.92]}] #weights for output layer + bias as last element in each array
+        output_layer = output_layer_weights
         network.append(output_layer) #above weights appended to output layer
         return network
  
@@ -127,7 +132,7 @@ dataset = [[0.50, 1.00, 0.75, 1], #first 3 values + expected output
 network_Inputs = len(dataset[0]) - 1
 network_Outputs = len(set([row[-1] for row in dataset]))
 network = init_Network(network_Inputs, 2, network_Outputs) #network takes in network inputs, neurons in hidden layer and network outputs
-network_Training(network, dataset, 0.1, 1000, network_Outputs) #takes in entire network, the dataset, learning rate (0.1), epochs, and the outputs of the network
+network_Training(network, dataset, 0.1, 100, network_Outputs) #takes in entire network, the dataset, learning rate (0.1), epochs, and the outputs of the network
 
 for layer in network:
 	print(layer) #prints out updated weights
